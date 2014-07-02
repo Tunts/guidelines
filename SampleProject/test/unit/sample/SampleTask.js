@@ -2,7 +2,7 @@ var expect = require("chai").expect;
 
 var requireHelper = require('../../require-helper');
 
-var CalculatorPrototype = requireHelper('sample/SampleTask');
+var SampleTask = requireHelper('sample/SampleTask');
 
 describe('SampleTask', function () {
 
