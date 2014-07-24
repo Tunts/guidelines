@@ -9,4 +9,4 @@ coverage
 /build
 /target
 /stash
-.idea/*
+.idea

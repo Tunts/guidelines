@@ -12,9 +12,21 @@ module.exports = function (grunt) {
       all: ['Gruntfile.js', 'lib/**/*.js', 'test/**/*.js', '!tmp/coverage/**/*.js']
     },
 
+    jsdoc : {
+      dist : {
+        src: ['lib/**/*.js'],
+        options: {
+          destination: 'docs'
+        }
+      }
+    },
+
     clean: {
       coverage: {
         src: ['tmp/coverage/']
+      },
+      docs: {
+        src: ['docs']
       }
     },
 
