@@ -95,4 +95,6 @@ module.exports = function (grunt) {
     'instrument', 'mochaTest:test', 'storeCoverage', 'makeReport']);
 
   grunt.registerTask('default', ['watch']);
+
+  grunt.registerTask('docs', ['clean:docs', 'jsdoc']);
 };
