@@ -21,4 +21,5 @@ Before you turn in your project be sure to check the list bellow
 - You are happy with your code
 - It passes `grunt jshint`
 - `grunt coverage` report shows apropriate coverage
+- `grunt docs` generate docs that are nice and tidy
 - You followed the rules on the [wiki](https://github.com/Tunts/guidelines/wiki)
