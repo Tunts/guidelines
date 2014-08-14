@@ -27,7 +27,9 @@
     "grunt-jsdoc": "^0.5.6"
   },
   "dependencies": {
-    "underscore": "^1.6.0",
-    "q": "^1.0.1"
+    "firebase": "^1.0.19",
+    "firebase-tools": "^1.1.1",
+    "q": "^1.0.1",
+    "underscore": "^1.6.0"
   }
 }
