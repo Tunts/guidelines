@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>My tittle</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="bower_components/firebase/firebase-debug.js"></script>
+        <script src="bower_components/firebase-simple-login/firebase-simple-login.js"></script>
+    </head>
+
+    <body style="margin:5em;">
+        <script>
+            var database = 'https://voppwishlist.firebaseio.com/';
+            var databaseRef = new Firebase(database);
+
+            var auth = new FirebaseSimpleLogin(databaseRef, function(error, user) {
+                  if (error) {
+                    console.log('[FirebaseSimpleLogin][Error: ' + error + ']');
+                  } else if (user) {
+                    console.log("[FirebaseSimpleLogin][Success: Successfully logged in][UserID: " + user.uid + ", Provider: " + user.provider + ']');
+                  } else {
+                    console.log('[FirebaseSimpleLogin][Message: User is logged out]');
+                  }
+            });
+
+            auth.sendPasswordResetEmail('lucas.andrade@tuntscorp.com', function(error) {
+                  if (error) {
+                    console.log('[sendPasswordResetEmail][Error: An error occurred during the reset your password process][' + error + ']');
+                  } else {
+                    console.log('[sendPasswordResetEmail][Success: Password reseted successfully. Check your e-mail to get the new password]');
+                  }
+            });
+        </script>
+
+        <form>
+            <h1> Reset Password </h1>
+            E-mail: <br>
+            <input type="text" name="email"  style="width:400px">
+
+            <input type="submit" value="Confirmar" id="sub">
+        </form>
+    </body>
+</html>
