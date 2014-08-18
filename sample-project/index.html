@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>VPink - Reset Password</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="bower_components/firebase/firebase-debug.js"></script>
+        <script src="bower_components/firebase-simple-login/firebase-simple-login.js"></script>
+    </head>
+
+    <body style="margin:5em;">
+        <script>
+            function resetPassword(event){
+                event.preventDefault();
+
+                var inputEmail = document.getElementById("txtEmail").value;
+                var voppFirebase = 'https://voppwishlist.firebaseio.com/';
+                var databaseRef = new Firebase(voppFirebase);
+
+                var auth = new FirebaseSimpleLogin(databaseRef, function(error, user) {
+                      if (error) {
+                        alert('[Error: ' + error + ']');
+                      } else if (user) {
+                        alert('[Success: Successfully logged in][UserID: ' + user.uid + ', Provider: ' + user.provider + ']');
+                      }
+                });
+
+                auth.sendPasswordResetEmail(inputEmail, function(error) {
+                      if (error) {
+                        alert('[Error: ' + error + ']');
+                      } else {
+                        alert('[Success: Password reseted successfully. Check your e-mail to get the new password]');
+                        location.reload();
+                      }
+                });
+            }
+        </script>
+
+        <form>
+            <h1> VPink - Reset Password </h1>
+            E-mail: <br>
+            <input type="email" id="txtEmail" name="email" class="sizeInputEmail" required>
+            <input type="submit" value="Confirmar" onclick="resetPassword(event)" >
+        </form>
+    </body>
+</html>
