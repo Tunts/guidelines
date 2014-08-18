@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>My tittle</title>
+        <title>VPink - Reset Password</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -39,15 +39,16 @@
                         alert('[Error: ' + error + ']');
                       } else {
                         alert('[Success: Password reseted successfully. Check your e-mail to get the new password]');
+                        location.reload();
                       }
                 });
             }
         </script>
 
         <form>
-            <h1> Reset Password </h1>
+            <h1> VPink - Reset Password </h1>
             E-mail: <br>
-            <input type="email" id="txtEmail" name="email" style="width:400px" required>
+            <input type="email" id="txtEmail" name="email" class="sizeInputEmail" required>
             <input type="submit" value="Confirmar" onclick="resetPassword(event)" >
         </form>
     </body>

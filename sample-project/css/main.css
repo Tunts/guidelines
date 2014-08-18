@@ -302,3 +302,8 @@ textarea {
         page-break-after: avoid;
     }
 }
+
+.sizeInputEmail{
+    width: 400px;
+}
+
