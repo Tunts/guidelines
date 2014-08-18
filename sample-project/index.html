@@ -19,7 +19,6 @@
 
     <body style="margin:5em;">
         <script>
-
             function getAuthFirebase(firebaseRef, callback){
                 var databaseRef = new Firebase(firebaseRef);
 
@@ -39,7 +38,7 @@
             function reset(auth, email){
                 auth.sendPasswordResetEmail(email.value, function(error) {
                       if (error) {
-                        alert('[Error: An error occurred during the reset your password process][' + error + ']');
+                        alert('[Error: ' + error + ']');
                       } else {
                         alert('[Success: Password reseted successfully. Check your e-mail to get the new password]');
                       }
@@ -64,7 +63,7 @@
                        //  }
 
                     }catch(e){
-                        alert('[Error: ocorreu um erro]');
+                        alert('[Error: An error occurred during the reset your password process]');
                     }
                 }
             }
