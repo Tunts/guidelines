@@ -19,34 +19,63 @@
 
     <body style="margin:5em;">
         <script>
-            var database = 'https://voppwishlist.firebaseio.com/';
-            var databaseRef = new Firebase(database);
 
-            var auth = new FirebaseSimpleLogin(databaseRef, function(error, user) {
-                  if (error) {
-                    console.log('[FirebaseSimpleLogin][Error: ' + error + ']');
-                  } else if (user) {
-                    console.log("[FirebaseSimpleLogin][Success: Successfully logged in][UserID: " + user.uid + ", Provider: " + user.provider + ']');
-                  } else {
-                    console.log('[FirebaseSimpleLogin][Message: User is logged out]');
-                  }
-            });
+            function getAuthFirebase(firebaseRef, callback){
+                var databaseRef = new Firebase(firebaseRef);
 
-            auth.sendPasswordResetEmail('lucas.andrade@tuntscorp.com', function(error) {
-                  if (error) {
-                    console.log('[sendPasswordResetEmail][Error: An error occurred during the reset your password process][' + error + ']');
-                  } else {
-                    console.log('[sendPasswordResetEmail][Success: Password reseted successfully. Check your e-mail to get the new password]');
-                  }
-            });
+                var auth = new FirebaseSimpleLogin(databaseRef, function(error, user) {
+                      if (error) {
+                        alert('[FirebaseSimpleLogin][Error: ' + error + ']');
+                      } else if (user) {
+                        alert('[FirebaseSimpleLogin][Success: Successfully logged in][UserID: ' + user.uid + ', Provider: ' + user.provider + ']');
+                      } else {
+                       alert('[FirebaseSimpleLogin][Message: User is logged out]');
+                      }
+                });
+
+                callback(auth);
+            }
+
+            function reset(auth, email){
+                auth.sendPasswordResetEmail(email.value, function(error) {
+                      if (error) {
+                        alert('[Error: An error occurred during the reset your password process][' + error + ']');
+                      } else {
+                        alert('[Success: Password reseted successfully. Check your e-mail to get the new password]');
+                      }
+                });
+            }
+
+            function resetPassword(email){
+                if(email.validity.valid) {
+                    try{
+
+                        getAuthFirebase('https://voppwishlist.firebaseio.com/', function(auth){
+                            reset(auth, email);
+                        });
+
+                       // function async(fn, callback){
+
+                       //       setTimeout(function() {
+                       //          fn();
+                       //          callback();
+                       //      }, 0);
+
+                       //  }
+
+                    }catch(e){
+                        alert('[Error: ocorreu um erro]');
+                    }
+                }
+            }
         </script>
 
         <form>
             <h1> Reset Password </h1>
             E-mail: <br>
-            <input type="text" name="email"  style="width:400px">
+            <input type="email" name="email" style="width:400px">
 
-            <input type="submit" value="Confirmar" >
+            <input type="submit" value="Confirmar" onclick="resetPassword(email)" required>
         </form>
     </body>
 </html>
