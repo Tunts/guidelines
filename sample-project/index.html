@@ -19,24 +19,22 @@
 
     <body style="margin:5em;">
         <script>
-            function getAuthFirebase(firebaseRef, callback){
-                var databaseRef = new Firebase(firebaseRef);
+            function resetPassword(event){
+                event.preventDefault();
+
+                var inputEmail = document.getElementById("txtEmail").value;
+                var voppFirebase = 'https://voppwishlist.firebaseio.com/';
+                var databaseRef = new Firebase(voppFirebase);
 
                 var auth = new FirebaseSimpleLogin(databaseRef, function(error, user) {
                       if (error) {
-                        alert('[FirebaseSimpleLogin][Error: ' + error + ']');
+                        alert('[Error: ' + error + ']');
                       } else if (user) {
-                        alert('[FirebaseSimpleLogin][Success: Successfully logged in][UserID: ' + user.uid + ', Provider: ' + user.provider + ']');
-                      } else {
-                       alert('[FirebaseSimpleLogin][Message: User is logged out]');
+                        alert('[Success: Successfully logged in][UserID: ' + user.uid + ', Provider: ' + user.provider + ']');
                       }
                 });
 
-                callback(auth);
-            }
-
-            function reset(auth, email){
-                auth.sendPasswordResetEmail(email.value, function(error) {
+                auth.sendPasswordResetEmail(inputEmail, function(error) {
                       if (error) {
                         alert('[Error: ' + error + ']');
                       } else {
@@ -44,37 +42,13 @@
                       }
                 });
             }
-
-            function resetPassword(email){
-                if(email.validity.valid) {
-                    try{
-
-                        getAuthFirebase('https://voppwishlist.firebaseio.com/', function(auth){
-                            reset(auth, email);
-                        });
-
-                       // function async(fn, callback){
-
-                       //       setTimeout(function() {
-                       //          fn();
-                       //          callback();
-                       //      }, 0);
-
-                       //  }
-
-                    }catch(e){
-                        alert('[Error: An error occurred during the reset your password process]');
-                    }
-                }
-            }
         </script>
 
         <form>
             <h1> Reset Password </h1>
             E-mail: <br>
-            <input type="email" name="email" style="width:400px">
-
-            <input type="submit" value="Confirmar" onclick="resetPassword(email)" required>
+            <input type="email" id="txtEmail" name="email" style="width:400px" required>
+            <input type="submit" value="Confirmar" onclick="resetPassword(event)" >
         </form>
     </body>
 </html>
